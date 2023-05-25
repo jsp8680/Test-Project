@@ -11,8 +11,10 @@ const MongoClient = mongodb.MongoClient;
 app.use(bodyParser.urlencoded({extended: true}));
 
 //set up ejs
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
+// set up html view engine
+app.engine('html', require('ejs').renderFile);
 //set up public folder
 app.use(express.static('public'));
 
@@ -32,7 +34,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Serve static files from the "public" directory
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 // Home page route
 app.get('/', (req, res) => {
@@ -56,32 +58,32 @@ const dbName = 'clients';
 const collectionName = 'client-names';
 
 // Function to insert data into MongoDB
-async function insertData(data) {
-  // Create a new MongoClient
-  const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+// async function insertData(data) {
+//   // Create a new MongoClient
+//   const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
-  try {
-    // Connect to the MongoDB server
-    await client.connect();
+//   try {
+//     // Connect to the MongoDB server
+//     await client.connect();
 
-    // Access the database
-    const db = client.db(dbName);
+//     // Access the database
+//     const db = client.db(dbName);
 
-    // Access the collection
-    const collection = db.collection(collectionName);
+//     // Access the collection
+//     const collection = db.collection(collectionName);
 
-    // Insert the data
-    await collection.insertOne(data);
+//     // Insert the data
+//     await collection.insertOne(data);
 
-    console.log('Data inserted successfully!');
-  } catch (error) {
-    console.error('Error occurred while inserting data:', error);
-    throw error;
-  } finally {
-    // Close the client connection
-    await client.close();
-  }
-}
+//     console.log('Data inserted successfully!');
+//   } catch (error) {
+//     console.error('Error occurred while inserting data:', error);
+//     throw error;
+//   } finally {
+//     // Close the client connection
+//     await client.close();
+//   }
+// }
 // Function to check if a user exists
 async function checkUserExists(username) {
   // Create a new MongoClient
@@ -132,10 +134,10 @@ const dataToInsert = {
   email: 'john.doe@example.com'
 };
 
-insertData(dataToInsert)
-  .catch(error => {
-    console.error('An error occurred:', error);
-  });
+// insertData(dataToInsert)
+//   .catch(error => {
+//     console.error('An error occurred:', error);
+//   });
 
 
   app.get('/register', (req, res) => {

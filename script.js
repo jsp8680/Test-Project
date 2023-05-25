@@ -46,7 +46,7 @@ mongoose.connect(url,connectionParams)
 
 // setup a route to show index.ejs
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index.html');
     }
 );
 
